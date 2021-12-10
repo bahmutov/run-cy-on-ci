@@ -1,0 +1,15 @@
+{
+  "name": "run-cy-on-ci",
+  "version": "1.0.0",
+  "description": "Launch on CI a particular Cypress test using grep or grep tags",
+  "files": ["bin"],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "debug": "^4.3.3"
+  }
+}
