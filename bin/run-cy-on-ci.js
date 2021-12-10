@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const debug = require('debug')('run-cy-on-ci')
+const triggerCircle = require('trigger-circleci-pipeline')
 
 const arg = require('arg')
 const args = arg({
@@ -25,3 +26,12 @@ if (!args['--grep']) {
 const { getSettings } = require('as-a')
 const settings = getSettings('.')
 console.log(settings)
+
+triggerCircle.triggerPipeline({
+  org: settings.CIRCLE_CI_ORG,
+  project: settings.CIRCLE_CI_PROJECT,
+  parameters: {
+    GREP: args['--grep'],
+  },
+  circleApiToken: settings.CIRCLE_CI_API_TOKEN
+})
