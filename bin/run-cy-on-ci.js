@@ -43,6 +43,7 @@ const parameters = {
   GREP_TAGS: args['--tags'],
   BURN: args['--burn'] || 1,
 }
+debug('launching %s/%s with parameters %o', org, project, parameters)
 
 triggerCircle
   .triggerPipeline({
