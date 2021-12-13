@@ -118,8 +118,8 @@ $ npx run-cy-on-ci --tag @regression --machines 5
 You can check if the options are set correctly by using `--dry` argument
 
 ```shell
-$ npx run-cy-on-ci --tag @demo --dry
-DRY: launching bahmutov/chat.io with parameters { GREP: undefined, GREP_TAGS: '@demo', BURN: 1 }
+$ npx run-cy-on-ci --tag @demo -n 3 --dry
+DRY: launching bahmutov/chat.io with parameters { GREP_TAGS: '@demo', MACHINES: 3 }
 ```
 
 ## 3rd party libraries
