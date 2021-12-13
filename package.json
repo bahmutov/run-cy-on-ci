@@ -1,14 +1,18 @@
 {
   "name": "run-cy-on-ci",
-  "version": "1.0.0",
+  "version": "0.0.0-development",
   "description": "Launch on CI a particular Cypress test using grep or grep tags",
   "files": [
     "bin"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "semantic-release": "semantic-release"
   },
-  "keywords": ["cypress-plugin", "circleci"],
+  "keywords": [
+    "cypress-plugin",
+    "circleci"
+  ],
   "author": "Gleb Bahmutov <gleb.bahmutov@gmail.com>",
   "license": "MIT",
   "dependencies": {
@@ -16,5 +20,12 @@
     "as-a": "^2.1.0",
     "debug": "^4.3.3",
     "trigger-circleci-pipeline": "^1.4.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bahmutov/run-cy-on-ci.git"
+  },
+  "devDependencies": {
+    "semantic-release": "^18.0.1"
   }
 }
