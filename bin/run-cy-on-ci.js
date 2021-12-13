@@ -9,6 +9,7 @@ const args = arg({
   '--tags': String,
   '--burn': Number,
   '--machines': Number,
+  '--branch': String,
   '--dry': Boolean,
 
   // aliases
@@ -17,6 +18,7 @@ const args = arg({
   '-t': '--tags',
   '--tag': '--tags',
   '-n': '--machines',
+  '--branch-name': '--branch',
 })
 debug('arguments %o', args)
 
@@ -68,19 +70,27 @@ if (args['--machines']) {
 
 if (args['--dry']) {
   console.log(
-    'DRY: launching %s/%s with parameters %o',
+    'DRY: launching %s/%s (%s branch) with parameters %o',
     org,
     project,
+    args['--branch'] || 'default',
     parameters,
   )
 } else {
-  debug('launching %s/%s with parameters %o', org, project, parameters)
+  debug(
+    'launching %s/%s (%s branch) with parameters %o',
+    org,
+    project,
+    args['--branch'] || 'default',
+    parameters,
+  )
 
   triggerCircle
-    .triggerPipeline({
+    .triggerPipelineWithFallback({
       org,
       project,
       parameters,
+      branchName: args['--branch'],
       circleApiToken: settings.CIRCLE_CI_API_TOKEN,
     })
     .catch((err) => {

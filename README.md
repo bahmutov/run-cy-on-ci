@@ -113,6 +113,14 @@ If your workflow accepts the `MACHINES` parameter for running tests in parallel,
 $ npx run-cy-on-ci --tag @regression --machines 5
 ```
 
+### Branch name
+
+You can trigger the workflow on a specific branch (with the fallback to the default branch, if the given branch is not found) using the `--branch` command line argument
+
+```shell
+$ npx run-cy-on-ci --grep "my new test" --branch featureA
+```
+
 ## Dry run
 
 You can check if the options are set correctly by using `--dry` argument
