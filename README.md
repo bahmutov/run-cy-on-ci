@@ -35,6 +35,9 @@ parameters:
   GREP:
     type: string
     default: ''
+  GREP_TAGS:
+    type: string
+    default: ''
   BURN:
     type: integer
     default: 1
@@ -42,17 +45,23 @@ parameters:
 workflows:
   some-tests:
     # runs the Web tests when the user supplies a grep pattern
-    when: << pipeline.parameters.GREP >>
+    when:
+      or:
+        - << pipeline.parameters.GREP >>
+        - << pipeline.parameters.GREP_TAGS >>
     jobs:
       - cypress/run:
           name: Filtered E2E tests
           no-workspace: true
           group: 'Test grep: << pipeline.parameters.GREP >>'
           tags: << pipeline.parameters.GREP >>
-          env: 'grep="<< pipeline.parameters.GREP >>",grepBurn=<< pipeline.parameters.BURN >>'
+          env: 'grep="<< pipeline.parameters.GREP >>",grepTags="<< pipeline.parameters.GREP_TAGS >>",grepBurn=<< pipeline.parameters.BURN >>'
 
   all-tests:
-    unless: << pipeline.parameters.GREP >>
+    unless:
+      or:
+        - << pipeline.parameters.GREP >>
+        - << pipeline.parameters.GREP_TAGS >>
     jobs:
       # normal build and test workflow
 ```
@@ -63,18 +72,30 @@ Any time you want to launch a specific test by title
 
 ```shell
 $ npx run-cy-on-ci "part of the test title"
+# equivalent
+$ npx run-cy-on-ci --grep "part of the test title"
+# equivalent alias
+$ npx run-cy-on-ci -g "part of the test title"
+# using Yarn
+$ yarn run-cy-on-ci -g "part of the test title"
 ```
 
-If you want to run that test N times
+### Tags
+
+You can run all tests tagged `@smoke` using `--tag @smoke` argument
 
 ```shell
-$ npx run-cy-on-ci "part of the test title" --burn N
+$ npx run-cy-on-ci --tag @smoke
+# use an alias -t
+$ npx run-cy-on-ci -t @smoke
 ```
 
-You can be explicit
+### Burn
+
+If you want to run that test N times (burning)
 
 ```shell
-$ yarn run-cy-on-ci --grep "part of the test title" --burn N
+$ npx run-cy-on-ci --grep "part of the test title" --burn N
 ```
 
 You can use aliases
