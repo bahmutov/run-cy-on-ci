@@ -104,6 +104,15 @@ You can use aliases
 $ npx run-cy-on-ci -g "part of the test title" -b N
 ```
 
+## Dry run
+
+You can check if the options are set correctly by using `--dry` argument
+
+```shell
+$ npx run-cy-on-ci --tag @demo --dry
+DRY: launching bahmutov/chat.io with parameters { GREP: undefined, GREP_TAGS: '@demo', BURN: 1 }
+```
+
 ## 3rd party libraries
 
 - [as-a](https://github.com/bahmutov/as-a) to collect token and config vars

@@ -8,6 +8,7 @@ const args = arg({
   '--grep': String,
   '--tags': String,
   '--burn': Number,
+  '--dry': Boolean,
 
   // aliases
   '-g': '--grep',
@@ -43,16 +44,26 @@ const parameters = {
   GREP_TAGS: args['--tags'],
   BURN: args['--burn'] || 1,
 }
-debug('launching %s/%s with parameters %o', org, project, parameters)
 
-triggerCircle
-  .triggerPipeline({
+if (args['--dry']) {
+  console.log(
+    'DRY: launching %s/%s with parameters %o',
     org,
     project,
     parameters,
-    circleApiToken: settings.CIRCLE_CI_API_TOKEN,
-  })
-  .catch((err) => {
-    console.error(err)
-    process.exit(1)
-  })
+  )
+} else {
+  debug('launching %s/%s with parameters %o', org, project, parameters)
+
+  triggerCircle
+    .triggerPipeline({
+      org,
+      project,
+      parameters,
+      circleApiToken: settings.CIRCLE_CI_API_TOKEN,
+    })
+    .catch((err) => {
+      console.error(err)
+      process.exit(1)
+    })
+}
