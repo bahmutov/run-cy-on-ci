@@ -30,8 +30,12 @@ console.log(settings)
 triggerCircle.triggerPipeline({
   org: settings.CIRCLE_CI_ORG,
   project: settings.CIRCLE_CI_PROJECT,
+  branchName: 'main',
   parameters: {
     GREP: args['--grep'],
   },
   circleApiToken: settings.CIRCLE_CI_API_TOKEN
+}).catch(err => {
+  console.error(err)
+  process.exit(1)
 })
