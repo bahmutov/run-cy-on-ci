@@ -6,7 +6,7 @@
     "bin"
   ],
   "bin": {
-    "run-cy-on-ci": "bin/run-cy-on-ci"
+    "run-cy-on-ci": "bin/run-cy-on-ci.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
