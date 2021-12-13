@@ -26,8 +26,8 @@ if (!args['--grep']) {
 }
 
 const { getSettings } = require('as-a')
-const settings = getSettings('.')
-debug('got settings with the following keys %o', Object.keys(settings))
+const settings = getSettings('run-cy-on-ci')
+debug('got settings for "run-cy-on-ci" with the following keys %o', Object.keys(settings))
 
 triggerCircle.triggerPipeline({
   org: settings.CIRCLE_CI_ORG,
