@@ -39,10 +39,18 @@ debug(
 
 const org = settings.CIRCLE_CI_ORG
 const project = settings.CIRCLE_CI_PROJECT
-const parameters = {
-  GREP: args['--grep'],
-  GREP_TAGS: args['--tags'],
-  BURN: args['--burn'] || 1,
+// only set the parameters the user passed in
+// this is useful to avoid sending parameters the target CircleCI pipeline
+// does not expect (like BURN or parallelization)
+const parameters = {}
+if (args['--grep']) {
+  parameters.GREP = args['--grep']
+}
+if (args['--tags']) {
+  parameters.GREP_TAGS = args['--tags']
+}
+if (args['--burn']) {
+  parameters.BURN = args['--burn']
 }
 
 if (args['--dry']) {
