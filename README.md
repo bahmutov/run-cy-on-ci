@@ -71,6 +71,18 @@ If you want to run that test N times
 $ npx run-cy-on-ci "part of the test title" --burn N
 ```
 
+You can be explicit
+
+```shell
+$ yarn run-cy-on-ci --grep "part of the test title" --burn N
+```
+
+You can use aliases
+
+```shell
+$ npx run-cy-on-ci -g "part of the test title" -b N
+```
+
 ## 3rd party libraries
 
 - [as-a](https://github.com/bahmutov/as-a) to collect token and config vars
