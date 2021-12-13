@@ -5,6 +5,9 @@
   "files": [
     "bin"
   ],
+  "bin": {
+    "run-cy-on-ci": "bin/run-cy-on-ci"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "semantic-release": "semantic-release"
