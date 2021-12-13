@@ -6,9 +6,11 @@ const triggerCircle = require('trigger-circleci-pipeline')
 const arg = require('arg')
 const args = arg({
   '--grep': String,
+  '--burn': Number,
 
   // aliases
   '-g': '--grep',
+  '-b': '--burn'
 })
 debug('arguments %o', args)
 
@@ -25,14 +27,14 @@ if (!args['--grep']) {
 
 const { getSettings } = require('as-a')
 const settings = getSettings('.')
-console.log(settings)
+debug('got settings with the following keys %o', Object.keys(settings))
 
 triggerCircle.triggerPipeline({
   org: settings.CIRCLE_CI_ORG,
   project: settings.CIRCLE_CI_PROJECT,
-  branchName: 'main',
   parameters: {
     GREP: args['--grep'],
+    BURN: args['--burn'] || 1,
   },
   circleApiToken: settings.CIRCLE_CI_API_TOKEN
 }).catch(err => {
