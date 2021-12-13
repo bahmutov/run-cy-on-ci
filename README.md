@@ -104,6 +104,15 @@ You can use aliases
 $ npx run-cy-on-ci -g "part of the test title" -b N
 ```
 
+### Machines
+
+If your workflow accepts the `MACHINES` parameter for running tests in parallel, you can use the `--machines | -n` parameter
+
+```shell
+# run all tests tagged @regression on five machines
+$ npx run-cy-on-ci --tag @regression --machines 5
+```
+
 ## Dry run
 
 You can check if the options are set correctly by using `--dry` argument

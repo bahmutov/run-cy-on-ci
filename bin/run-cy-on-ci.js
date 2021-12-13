@@ -8,6 +8,7 @@ const args = arg({
   '--grep': String,
   '--tags': String,
   '--burn': Number,
+  '--machines': Number,
   '--dry': Boolean,
 
   // aliases
@@ -15,6 +16,7 @@ const args = arg({
   '-b': '--burn',
   '-t': '--tags',
   '--tag': '--tags',
+  '-n': '--machines',
 })
 debug('arguments %o', args)
 
@@ -50,7 +52,18 @@ if (args['--tags']) {
   parameters.GREP_TAGS = args['--tags']
 }
 if (args['--burn']) {
+  if (args['--burn'] < 1) {
+    console.error('--burn must be >= 1')
+    process.exit(1)
+  }
   parameters.BURN = args['--burn']
+}
+if (args['--machines']) {
+  if (args['--machines'] < 1) {
+    console.error('--machines must be >= 1')
+    process.exit(1)
+  }
+  parameters.MACHINES = args['--machines']
 }
 
 if (args['--dry']) {
