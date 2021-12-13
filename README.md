@@ -15,12 +15,16 @@ Put the settings into the local `.as-a.ini` file or in the `~/.as-a/.as-a.ini` f
 
 ```ini
 [run-cy-on-ci]
+; CircleCI token to use, grab it at
+; https://app.circleci.com/settings/user/tokens
 CIRCLE_CI_API_TOKEN=...
 ; from this folder we want to trigger CircleCI pipeline for
 ; https://github.com/bahmutov/chat.io
 CIRCLE_CI_ORG=bahmutov
 CIRCLE_CI_PROJECT=chat.io
 ```
+
+Where `CIRCLE_CI_API_TOKEN` is your personal CircleCI token you can create at [app.circleci.com/settings/user/tokens](https://app.circleci.com/settings/user/tokens).
 
 Set up [cypress-grep](https://github.com/cypress-io/cypress-grep) in your target project, including CircleCI Workflows with parameters following the blog post [Burn Cypress Tests on CircleCI](https://glebbahmutov.com/blog/burn-tests-on-circle/). For example, see [chat.io config file](https://github.com/bahmutov/chat.io/blob/main/.circleci/config.yml)
 
