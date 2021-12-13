@@ -1,4 +1,4 @@
-# run-cy-on-ci
+# run-cy-on-ci [![ci](https://github.com/bahmutov/run-cy-on-ci/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/bahmutov/run-cy-on-ci/actions/workflows/ci.yml)
 > Launch on CI a particular Cypress test using grep or grep tags
 
 ## Install
