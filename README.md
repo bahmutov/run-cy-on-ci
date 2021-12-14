@@ -1,6 +1,8 @@
 # run-cy-on-ci [![ci](https://github.com/bahmutov/run-cy-on-ci/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/bahmutov/run-cy-on-ci/actions/workflows/ci.yml)
 > Launch on CI a particular Cypress test using grep or grep tags
 
+Watch the video [Run Cypress On CircleCI From Your Terminal](https://youtu.be/fBcoMmNBY5w)
+
 ## Install
 
 Add this utility to your project
