@@ -22,7 +22,7 @@
     "arg": "^5.0.1",
     "as-a": "^2.1.0",
     "debug": "^4.3.3",
-    "trigger-circleci-pipeline": "^1.5.0"
+    "trigger-circleci-pipeline": "^1.6.0"
   },
   "repository": {
     "type": "git",

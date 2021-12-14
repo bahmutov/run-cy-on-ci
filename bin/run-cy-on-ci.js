@@ -96,6 +96,7 @@ if (args['--dry']) {
     parameters,
   )
 
+  // Promise.resolve({ id: '4b960ef1-1155-41c4-a1c1-17e5e7c41fae' })
   triggerCircle
     .triggerPipelineWithFallback({
       org,
@@ -105,8 +106,18 @@ if (args['--dry']) {
       circleApiToken,
     })
     .then(({ id }) => {
-      console.log('pipeline ID', id)
-      return triggerCircle.printWorkflows(id)
+      // at first the pipeline is "pending",
+      // thus we need to wait for it to start running
+      // or fail to run
+      console.log('waiting for pipeline to start running...')
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve({ id })
+        }, 5000)
+      })
+    })
+    .then(({ id }) => {
+      return triggerCircle.printWorkflows(id, circleApiToken)
     })
     .catch((err) => {
       console.error(err)

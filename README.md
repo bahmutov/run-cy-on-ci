@@ -84,6 +84,16 @@ $ npx run-cy-on-ci -g "part of the test title"
 $ yarn run-cy-on-ci -g "part of the test title"
 ```
 
+After starting the pipeline successfully, it should print the workflows and their URLs
+
+```text
+CircleCI pipeline number 130
+trigger pipeline successfully
+waiting for pipeline to start running...
+1 workflow(s) for pipeline 9cb047b5-...
+some-tests running https://app.circleci.com/pipelines/.../workflows/2e7f6643-...
+```
+
 ### Tags
 
 You can run all tests tagged `@smoke` using `--tag @smoke` argument
