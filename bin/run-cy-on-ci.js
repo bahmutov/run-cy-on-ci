@@ -104,6 +104,10 @@ if (args['--dry']) {
       branchName: args['--branch'],
       circleApiToken,
     })
+    .then(({ id }) => {
+      console.log('pipeline ID', id)
+      return triggerCircle.printWorkflows(id)
+    })
     .catch((err) => {
       console.error(err)
       process.exit(1)
