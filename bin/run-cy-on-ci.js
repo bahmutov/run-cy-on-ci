@@ -43,10 +43,21 @@ debug(
 
 const org = settings.CIRCLE_CI_ORG
 const project = settings.CIRCLE_CI_PROJECT
+const circleApiToken = settings.CIRCLE_CI_API_TOKEN
+// take any remaining settings and pass via parameters
+const paramsFromSettings = {
+  ...settings,
+}
+delete paramsFromSettings.CIRCLE_CI_ORG
+delete paramsFromSettings.CIRCLE_CI_PROJECT
+delete paramsFromSettings.CIRCLE_CI_API_TOKEN
+
 // only set the parameters the user passed in
 // this is useful to avoid sending parameters the target CircleCI pipeline
 // does not expect (like BURN or parallelization)
-const parameters = {}
+const parameters = {
+  ...paramsFromSettings,
+}
 if (args['--grep']) {
   parameters.GREP = args['--grep']
 }
@@ -91,7 +102,7 @@ if (args['--dry']) {
       project,
       parameters,
       branchName: args['--branch'],
-      circleApiToken: settings.CIRCLE_CI_API_TOKEN,
+      circleApiToken,
     })
     .catch((err) => {
       console.error(err)

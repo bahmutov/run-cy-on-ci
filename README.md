@@ -125,6 +125,23 @@ You can trigger the workflow on a specific branch (with the fallback to the defa
 $ npx run-cy-on-ci --grep "my new test" --branch featureA
 ```
 
+## Additional parameters
+
+You can pass additional parameters to the workflow you are triggering by putting them into `.as-a.ini` file. For example, if your pipeline has the `MESSAGE` parameter, set its value in the file like this:
+
+```init
+[run-cy-on-ci]
+; CircleCI token to use, grab it at
+; https://app.circleci.com/settings/user/tokens
+CIRCLE_CI_API_TOKEN=...
+; from this folder we want to trigger CircleCI pipeline for
+; https://github.com/bahmutov/chat.io
+CIRCLE_CI_ORG=bahmutov
+CIRCLE_CI_PROJECT=chat.io
+; any other parameters to pass to the pipeline
+MESSAGE=My friend
+```
+
 ## Dry run
 
 You can check if the options are set correctly by using `--dry` argument
