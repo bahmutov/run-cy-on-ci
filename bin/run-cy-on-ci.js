@@ -43,7 +43,10 @@ debug(
 
 const org = settings.CIRCLE_CI_ORG
 const project = settings.CIRCLE_CI_PROJECT
-const circleApiToken = settings.CIRCLE_CI_API_TOKEN
+// check if the CircleCI API token is set via an environment variable
+const circleApiToken =
+  settings.CIRCLE_CI_API_TOKEN || process.env.CIRCLE_CI_API_TOKEN
+
 // take any remaining settings and pass via parameters
 const paramsFromSettings = {
   ...settings,

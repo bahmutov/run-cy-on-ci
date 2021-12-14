@@ -26,7 +26,43 @@ CIRCLE_CI_PROJECT=chat.io
 
 Where `CIRCLE_CI_API_TOKEN` is your personal CircleCI token you can create at [app.circleci.com/settings/user/tokens](https://app.circleci.com/settings/user/tokens).
 
-Set up [cypress-grep](https://github.com/cypress-io/cypress-grep) in your target project, including CircleCI Workflows with parameters following the blog post [Burn Cypress Tests on CircleCI](https://glebbahmutov.com/blog/burn-tests-on-circle/). For example, see [chat.io config file](https://github.com/bahmutov/chat.io/blob/main/.circleci/config.yml)
+### CircleCI API token
+
+You can keep the `CIRCLE_CI_API_TOKEN` in the local `.as-a.ini` file, or pass it as an environment variable.
+
+```ini
+# local .as-a.ini file
+[run-cy-on-ci]
+CIRCLE_CI_ORG=bahmutov
+CIRCLE_CI_PROJECT=chat.io
+```
+
+```shell
+$ CIRCLE_CI_API_TOKEN=... npx run-cy-on-ci "part of the test title"
+```
+
+You can also use [as-a](https://github.com/bahmutov/as-a) to set the environment variable during the execution of the command. Place the `CIRCLE_CI_API_TOKEN` in the `~/.as-a/.as-a.ini` file under some section name:
+
+```ini
+# ~/.as-a/.as-a.ini file
+[circleci-user]
+CIRCLE_CI_API_TOKEN=...
+
+# local .as-a.ini file
+[run-cy-on-ci]
+CIRCLE_CI_ORG=bahmutov
+CIRCLE_CI_PROJECT=chat.io
+```
+
+```shell
+$ as-a circleci-user npx run-cy-on-ci "part of the test title"
+```
+
+**Important:** never check in or share the `.as-a.ini` files. Git ignore it as soon as possible.
+
+### CircleCI workflow setup
+
+In your target project, set up [cypress-grep](https://github.com/cypress-io/cypress-grep) in your target project, including CircleCI Workflows with parameters following the blog post [Burn Cypress Tests on CircleCI](https://glebbahmutov.com/blog/burn-tests-on-circle/). For example, see [chat.io config file](https://github.com/bahmutov/chat.io/blob/main/.circleci/config.yml)
 
 ```yml
 # .circleci/config.yml
