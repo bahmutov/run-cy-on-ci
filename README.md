@@ -83,6 +83,10 @@ parameters:
   BURN:
     type: integer
     default: 1
+  # optional spec pattern to pass via "--spec <pattern>"
+  SPEC:
+    type: string
+    default: ''
 
 workflows:
   some-tests:
@@ -91,12 +95,14 @@ workflows:
       or:
         - << pipeline.parameters.GREP >>
         - << pipeline.parameters.GREP_TAGS >>
+        - << pipeline.parameters.SPEC >>
     jobs:
       - cypress/run:
           name: Filtered E2E tests
           no-workspace: true
           group: 'Test grep: << pipeline.parameters.GREP >>'
           tags: << pipeline.parameters.GREP >>
+          spec: << pipeline.parameters.SPEC >>
           env: 'grep="<< pipeline.parameters.GREP >>",grepTags="<< pipeline.parameters.GREP_TAGS >>",grepBurn=<< pipeline.parameters.BURN >>'
 
   all-tests:
@@ -104,6 +110,7 @@ workflows:
       or:
         - << pipeline.parameters.GREP >>
         - << pipeline.parameters.GREP_TAGS >>
+        - << pipeline.parameters.SPEC >>
     jobs:
       # normal build and test workflow
 ```
@@ -140,6 +147,26 @@ You can run all tests tagged `@smoke` using `--tag @smoke` argument
 $ npx run-cy-on-ci --tag @smoke
 # use an alias -t
 $ npx run-cy-on-ci -t @smoke
+```
+
+### Spec
+
+You can pass the `--spec <pattern>` argument to run one or multiple specs (or use its alias `-s`). **Important:** try the pattern in the target project using the `--spec` CLI arguments. It requires `cypress/integration/...` prefix.
+
+```shell
+$ npx run-cy-on-ci --spec cypress/integration/spec1.js
+```
+
+To run all spec files in a folder, use wildcard - make sure to quote it to avoid your shell expanding the wildcards to random filenames.
+
+```shell
+$ npx run-cy-on-ci --spec 'cypress/integration/featureA/**/*.js'
+```
+
+You can also use wildcards in the folders, like this
+
+```shell
+$ npx run-cy-on-ci --spec '**/featureB/**/*.js'
 ```
 
 ### Burn
@@ -211,6 +238,8 @@ This utility uses [debug](https://www.npmjs.com/package/debug) to print verbose 
 ```
 $ DEBUG=run-cy-on-ci ...
 ```
+
+If the launched workflow shows `Build Error` then it might be because the target pipeline does not accept the parameters you are sending to it. Check the target CircleCI config file.
 
 ## Small print
 

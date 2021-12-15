@@ -6,6 +6,7 @@ const triggerCircle = require('trigger-circleci-pipeline')
 const arg = require('arg')
 const args = arg({
   '--grep': String,
+  '--spec': String,
   '--tags': String,
   '--burn': Number,
   '--machines': Number,
@@ -14,6 +15,7 @@ const args = arg({
 
   // aliases
   '-g': '--grep',
+  '-s': '--spec',
   '-b': '--burn',
   '-t': '--tags',
   '--tag': '--tags',
@@ -27,10 +29,11 @@ if (!args['--grep'] && args._.length === 1) {
   args['--grep'] = args._[0]
 }
 
-if (!args['--grep'] && !args['--tags']) {
+if (!args['--grep'] && !args['--tags'] && !args['--spec']) {
   console.error('Need part of the title to grep for')
   console.error('--grep <part of title>')
   console.error('or some tags with --tag <tag>')
+  console.error('or spec pattern with --spec <path>')
   process.exit(1)
 }
 
@@ -66,6 +69,9 @@ if (args['--grep']) {
 }
 if (args['--tags']) {
   parameters.GREP_TAGS = args['--tags']
+}
+if (args['--spec']) {
+  parameters.SPEC = args['--spec']
 }
 if (args['--burn']) {
   if (args['--burn'] < 1) {
