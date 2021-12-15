@@ -169,6 +169,17 @@ You can also use wildcards in the folders, like this
 $ npx run-cy-on-ci --spec '**/featureB/**/*.js'
 ```
 
+#### Spec helpers
+
+If there are no `/` or `*` characters in your `--spec` pattern, this utility automatically adds them for friendlier execution.
+
+```
+# same as --spec '**/demo.js'
+$ npx run-cy-on-ci --spec 'demo.js'
+# same as --spec '**/featureA/**/*.*'
+$ npx run-cy-on-ci --spec featureA
+```
+
 ### Burn
 
 If you want to run that test N times (burning)

@@ -71,7 +71,31 @@ if (args['--tags']) {
   parameters.GREP_TAGS = args['--tags']
 }
 if (args['--spec']) {
-  parameters.SPEC = args['--spec']
+  // by default --spec requires path to the file including the integration folder
+  // and makes it unwieldy to wildcard folders and files
+  // if the user passes just a filename with extension, prepend wildcards
+  let specPattern = args['--spec']
+  if (!specPattern.includes('/') && !specPattern.includes('*')) {
+    // foo.js => **/foo.js
+    if (specPattern.includes('.')) {
+      specPattern = `**/${specPattern}`
+      debug(
+        'changed spec pattern from "%s" to "%s"',
+        args['--spec'],
+        specPattern,
+      )
+    } else {
+      // folder name
+      // featureA => **/featureA/**/*.*
+      specPattern = `**/${specPattern}/**/*.*`
+      debug(
+        'changed spec pattern from "%s" to "%s"',
+        args['--spec'],
+        specPattern,
+      )
+    }
+  }
+  parameters.SPEC = specPattern
 }
 if (args['--burn']) {
   if (args['--burn'] < 1) {
