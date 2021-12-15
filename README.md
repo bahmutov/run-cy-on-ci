@@ -102,7 +102,7 @@ workflows:
           no-workspace: true
           group: 'Test grep: << pipeline.parameters.GREP >>'
           tags: << pipeline.parameters.GREP >>
-          spec: << pipeline.parameters.SPEC >>
+          spec: '<< pipeline.parameters.SPEC >>'
           env: 'grep="<< pipeline.parameters.GREP >>",grepTags="<< pipeline.parameters.GREP_TAGS >>",grepBurn=<< pipeline.parameters.BURN >>'
 
   all-tests:
