@@ -1,4 +1,5 @@
 # run-cy-on-ci [![ci](https://github.com/bahmutov/run-cy-on-ci/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/bahmutov/run-cy-on-ci/actions/workflows/ci.yml)
+
 > Launch on CI a particular Cypress test using grep or grep tags
 
 Watch the video [Run Cypress On CircleCI From Your Terminal](https://youtu.be/fBcoMmNBY5w)
@@ -178,6 +179,8 @@ If there are no `/` or `*` characters in your `--spec` pattern, this utility aut
 $ npx run-cy-on-ci --spec 'demo.js'
 # same as --spec '**/featureA/**/*.*'
 $ npx run-cy-on-ci --spec featureA
+# run all integration tests, assuming they are in "cypress/integration" folder
+$ npx run-cy-on-ci --spec integration
 ```
 
 ### Burn
