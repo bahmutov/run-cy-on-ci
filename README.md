@@ -214,6 +214,12 @@ You can trigger the workflow on a specific branch (with the fallback to the defa
 $ npx run-cy-on-ci --grep "my new test" --branch featureA
 ```
 
+**Tip:** you can get the current branch name using Git v2.22+ like
+
+```shell
+$ npx run-cy-on-ci --grep "my new test" --branch $(git branch --show-current)
+```
+
 ## Additional parameters
 
 You can pass additional parameters to the workflow you are triggering by putting them into `.as-a.ini` file. For example, if your pipeline has the `MESSAGE` parameter, set its value in the file like this:
@@ -230,6 +236,8 @@ CIRCLE_CI_PROJECT=chat.io
 ; any other parameters to pass to the pipeline
 MESSAGE=My friend
 ```
+
+Note: I have opened an issue [#9](https://github.com/bahmutov/run-cy-on-ci/issues/9) to pass any additional parameters via command line argument `--params`.
 
 ## Dry run
 
