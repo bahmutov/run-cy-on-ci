@@ -20,7 +20,7 @@
   "license": "MIT",
   "dependencies": {
     "arg": "^5.0.1",
-    "as-a": "^2.1.0",
+    "as-a": "^2.2.7",
     "debug": "^4.3.3",
     "trigger-circleci-pipeline": "^1.6.0"
   },
@@ -29,7 +29,7 @@
     "url": "https://github.com/bahmutov/run-cy-on-ci.git"
   },
   "devDependencies": {
-    "prettier": "^2.5.1",
-    "semantic-release": "^18.0.1"
+    "prettier": "^3.3.3",
+    "semantic-release": "^24"
   }
 }
